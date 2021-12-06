@@ -5,7 +5,7 @@
 
 #pp = pprint.PrettyPrinter(indent=4)
 
-inputfile = open('input2.txt', 'r')
+inputfile = open('input.txt', 'r')
 input_list = inputfile.read().split('\n')
 
 class VentField:
@@ -85,6 +85,9 @@ class VentField:
 
                 x += coor1
                 y += coor2
+
+            new_value_temp = self.field.setdefault((end_x,end_y), 0) + 1
+            self.field[(end_x,end_y)] = new_value_temp
 
 
     def get_most(self):
