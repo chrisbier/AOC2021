@@ -5,7 +5,7 @@
 
 #pp = pprint.PrettyPrinter(indent=4)
 
-inputfile = open('input.txt', 'r')
+inputfile = open('input2.txt', 'r')
 input_list = inputfile.read().split('\n')
 
 class VentField:
@@ -121,3 +121,4 @@ print("Highest danger point: ", vent_field.get_most())
 all_dangerous = vent_field.get_all_most()
 #print(all_dangerous)
 print("All Danger points above 2: ", len(all_dangerous))
+# 20273 is too low?
