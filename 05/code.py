@@ -5,7 +5,7 @@
 
 #pp = pprint.PrettyPrinter(indent=4)
 
-inputfile = open('example.txt', 'r')
+inputfile = open('input.txt', 'r')
 input_list = inputfile.read().split('\n')
 
 class VentField:
@@ -45,7 +45,7 @@ class VentField:
                 y+=1
 
         # Horizontal Line
-        if start_y == end_y:
+        elif start_y == end_y:
             if start_x < end_x:
                 x = start_x
                 x_end = end_x
@@ -59,7 +59,33 @@ class VentField:
                 x+=1
         
         # Diagonal
-        # Do nothing
+        else:
+            # Get direction
+            x = start_x
+            y = start_y
+
+            if x < end_x:
+                coor1 = 1
+                if y < end_y:
+                    coor2 = 1
+                else:
+                    coor2 = -1
+
+            if x > end_x:
+                coor1 = -1
+                if y < end_y:
+                    coor2 = 1
+                else:
+                    coor2 = -1
+            #print(start_x, start_y, coor1, coor2, end_x, end_y)
+
+            while (x, y) != (end_x, end_y):
+                new_value_temp = self.field.setdefault((x,y), 0) + 1
+                self.field[(x,y)] = new_value_temp
+
+                x += coor1
+                y += coor2
+
 
     def get_most(self):
         # find most
@@ -69,8 +95,11 @@ class VentField:
     def get_all_most(self):
         # find all most
         #most_value = self.get_most()
-        return [ x for x in self.field if self.field[x] >= self.dangerous ]
+        return [ self.field[x] for x in self.field if self.field[x] >= self.dangerous ]
 
+
+    def get_line(self):
+        return [ self.field[(6,4)], self.field[(5,3)], self.field[(4,2)], self.field[(3,1)], self.field[(2,0)] ]
 
 
 vent_field = VentField()
@@ -87,6 +116,8 @@ for line in input_list:
     vent_field.add_line(first_tup, second_tup)
 
 #print(vent_field)
-print(vent_field.get_most())
+print("Highest danger point: ", vent_field.get_most())
+#print(vent_field.get_line())
 all_dangerous = vent_field.get_all_most()
-print(len(all_dangerous))
+#print(all_dangerous)
+print("All Danger points above 2: ", len(all_dangerous))
