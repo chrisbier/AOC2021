@@ -39,6 +39,7 @@ counter = 1
 
 while counter <= days_to_run:
     lanternfish = run_day(lanternfish)
+    print("Simulating Day: ", counter)
     #print("After ", counter, " days: ", len(lanternfish))#, lanternfish)
     counter += 1
 
